@@ -198,7 +198,6 @@ def main():
         draw_window(yellow, red, yellow_bullets, red_bullets, yellow_health, red_health)
 
     main()
-####
 
 
 # ensure that game only starts when this file is run
