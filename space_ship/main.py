@@ -1,44 +1,57 @@
+# -------
+# MODULES
+# -------
 import pygame
 import os # operating system = find path to the images in our Assets folder
 pygame.font.init() # initialize pygame font library
 pygame.mixer.init()
 
-######## window ########
+# ------
+# WINDOW
+# ------
 WIDTH, HEIGHT = 900, 500
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Space Ship")
-####
-
 BORDER = pygame.Rect((WIDTH//2-5), 0, 10, HEIGHT)
 
-######## sound ########
+# -----
+# SOUND
+# -----
 BULLET_HIT_SOUND = pygame.mixer.Sound(os.path.join('Assets', 'Assets_Grenade+1.mp3'))
 BULLET_FIRE_SOUND = pygame.mixer.Sound(os.path.join('Assets', 'Gun+Silencer.mp3'))
-####
 
-######## colour/font ########
+
+# -----------
+# COLOUR/FONT
+# -----------
 BORDER_COL = (0, 0, 0)
 YELLOW = (226, 224, 59)
 RED = (240, 39, 54)
 HEALTH_COL = (242, 84, 103)
 HEALTH_FONT = pygame.font.SysFont('comicsans', 40)
 WINNER_FONT = pygame.font.SysFont('comicsans', 100)
-####
 
-######## variables ########
+
+# ---------
+# VARAIBLES
+# ---------
 FPS = 60
 VEL = 5 # space_ship velocity
 BULLET_VEL = 7
 MAX_BULLET = 3
 SPACESHIP_WIDTH, SPACESHIP_HEIGHT = 55, 40
-####
 
-######## unique event id for users~ ########
+
+# --------------
+# USER UNIQUE ID
+# --------------
 YELLOW_HIT = pygame.USEREVENT + 1
 RED_HIT = pygame.USEREVENT + 2
-####
 
-######## images ########
+
+# ------
+# IMAGES
+# ------
 # YELLOW_SPACESHIP_IMAGE & RED_SPACESHIP_IMAGE are 'surfaces'
 YELLOW_SPACESHIP_IMAGE = pygame.image.load(
     os.path.join('Assets', 'spaceship_yellow.png'))
@@ -51,9 +64,11 @@ RED_SPACESHIP = pygame.transform.rotate(pygame.transform.scale(
     RED_SPACESHIP_IMAGE, (SPACESHIP_WIDTH, SPACESHIP_HEIGHT)), 270)
 
 SPACE = pygame.transform.scale(pygame.image.load(os.path.join('Assets', 'space.png')), (WIDTH, HEIGHT))
-########
 
-######## game elements ########
+
+# ------------
+# GAME ELEMENT
+# ------------
 def draw_window(yellow, red, yellow_bullets, red_bullets, yellow_health, red_health):
     # 0,0 coordinate is top left
     WIN.blit(SPACE, (0, 0))
@@ -80,9 +95,10 @@ def draw_winner(text):
                          HEIGHT//2 - draw_text.get_height()//2))
     pygame.display.update()
     pygame.time.delay(5000) # pause the game for 5 sec
-####
 
-######## spaceship/bullet movement ########
+# -------------------------
+# SPACESHIP/BULLET MOVEMENT
+# -------------------------
 def yellow_handle_movement(keys_pressed, yellow):
     if keys_pressed[pygame.K_a] and (yellow.x-VEL > 0): #LEFT
         yellow.x -= VEL
@@ -119,9 +135,11 @@ def handle_bullets(yellow_bullets, red_bullets, yellow, red):
             red_bullets.remove(bullet)
         elif bullet.x < 0:
             red_bullets.remove(bullet)
-####
 
-######## main ########
+
+# ----
+# MAIN
+# ----
 def main():
     # a rectangle to see where these spaceship are going
     # .Rect(x, y, width, height)
